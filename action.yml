@@ -1,0 +1,22 @@
+name: "Check action updates"
+description: "Github action that scans workflow and check if available updates"
+author: "Rahul Patil"
+inputs:
+  myInput:
+    description: "Input to use"
+    default: "world"
+outputs:
+  myOutput:
+    description: "Output from the action"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+# inputs:
+#   ignoreActions:
+#     required: false
+#     description: "Provide list of action that you want to ignore"
+#     default: []
+# outputs:
+#   actions:
+#     description: "List of available updates"
+# runs: gh-action-checker
