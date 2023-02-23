@@ -1,0 +1,5 @@
+{
+    ".github/workflows": {
+        "actions/checkout@v2": "actions/checkout@v3"
+    }
+}

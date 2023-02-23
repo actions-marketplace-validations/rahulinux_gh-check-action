@@ -2,21 +2,22 @@ name: "Check action updates"
 description: "Github action that scans workflow and check if available updates"
 author: "Rahul Patil"
 inputs:
-  myInput:
-    description: "Input to use"
-    default: "world"
+  ignoreActions:
+    required: false
+    description: "Provide list of action that you want to ignore"
+    default: ""
+  workflowDir:
+    required: false
+    description: "Provide workflow directory path"
+    default: .github/workflows
+  loglevel:
+    required: false
+    description: "Set log level: debug, error, warn"
+    default: "info"
+
 outputs:
-  myOutput:
-    description: "Output from the action"
+  actions:
+    description: "List of available updates"
 runs:
   using: "docker"
   image: "Dockerfile"
-# inputs:
-#   ignoreActions:
-#     required: false
-#     description: "Provide list of action that you want to ignore"
-#     default: []
-# outputs:
-#   actions:
-#     description: "List of available updates"
-# runs: gh-action-checker
