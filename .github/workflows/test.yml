@@ -19,5 +19,5 @@ jobs:
       - name: Check outputs
         run: |
           echo '${{ steps.selftest.outputs.actions }}' > output.json
-          echo '{"/github/workspace/.github/workflows":{"actions/checkout@v2":"actions/checkout@v3"}}' > expected.json
+          echo '{"/github/workspace/.github/workflows":{"rahulinux/gh-check-action@main":"rahulinux/gh-check-action@v1"}}' > expected.json
           diff <( jq --sort-keys . output.json) <(jq --sort-keys . expected.json)
