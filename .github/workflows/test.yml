@@ -1,5 +1,6 @@
 name: Integration Test
 on: [push]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -8,9 +9,11 @@ jobs:
       - uses: sergeysova/jq-action@v2
       - name: Self test
         id: selftest
-
         # Put your action repo here
         uses: rahulinux/gh-check-action@main
+        with:
+          workflowDir: "/github/workspace/.github/workflows"
+          loglevel: "debug"
 
       - name: Check outputs
         run: |

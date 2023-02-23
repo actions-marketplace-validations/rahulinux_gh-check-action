@@ -77,7 +77,8 @@ func main() {
 	if !local {
 		log.Print("[INFO] CI mode")
 		ignore_action = getEnv("INPUT_IGNOREACTIONS", "")
-		workflow_dir = getEnv("INPUT_WORKFLOW_DIR", "")
+		workflow_dir = getEnv("INPUT_WORKFLOWDIR", "")
+		loglevel = getEnv("INPUT_LOGLEVEL", "")
 	} else {
 		log.Print("[INFO] CI Local mode")
 	}
