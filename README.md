@@ -5,8 +5,16 @@ action.
 
 also, you can run local cli to update workflow file for new action update. [TODO]
 
+### INSTALLATION
 
-# CLI
+Copy and paste the following snippet into your workflow `.yml` file.
+
+```yaml
+- name: Check action updates
+  uses: rahulinux/gh-check-action@v1.0.0
+```
+
+### CLI
 
 ```
   -ignore_action string
@@ -26,7 +34,7 @@ also, you can run local cli to update workflow file for new action update. [TODO
 ```
 
 
-# Sample output
+### Sample output
 
 ```
 > go run .  -local -remote_repos rahulinux/echo-service  -token XXXX
