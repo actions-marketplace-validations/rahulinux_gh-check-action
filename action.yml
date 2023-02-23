@@ -14,6 +14,10 @@ inputs:
     required: false
     description: "Set log level: debug, error, warn"
     default: "info"
+  prettyprint:
+    required: false
+    description: "Get json dump with prettyprint"
+    default: "true"
 
 outputs:
   actions:

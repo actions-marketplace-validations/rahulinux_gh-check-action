@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/hashicorp/logutils"
@@ -47,8 +48,17 @@ func cleanUp(temp_dirs []string) {
 	}
 }
 
+func jsonDump(data interface{}, prettyprint bool) ([]byte, error) {
+	if prettyprint {
+		return json.MarshalIndent(data, "", "    ")
+	} else {
+		return json.Marshal(data)
+	}
+}
+
 func main() {
 	var local bool
+	var prettyprint bool
 	var loglevel string
 	var ignore_action string
 	var workflow_dir string
@@ -60,6 +70,7 @@ func main() {
 	action_updates := make(map[string]map[string]string)
 
 	flag.BoolVar(&local, "local", false, "Use to run local mode")
+	flag.BoolVar(&prettyprint, "prettyprint", true, "Json prettyprint output")
 	flag.StringVar(&workflow_dir, "workflow_dir", ".github/workflows", "Specify workflow dir")
 	flag.StringVar(&loglevel, "loglevel", "info", "Specify log level: debug, warn, error")
 	flag.StringVar(&ignore_action, "ignore_action", "", "comma separated list of actions to ignore")
@@ -79,6 +90,7 @@ func main() {
 		ignore_action = getEnv("INPUT_IGNOREACTIONS", "")
 		workflow_dir = getEnv("INPUT_WORKFLOWDIR", "")
 		loglevel = getEnv("INPUT_LOGLEVEL", "")
+		prettyprint, _ = strconv.ParseBool(getEnv("INPUT_PRETTYPRINT", "true"))
 	} else {
 		log.Print("[INFO] CI Local mode")
 	}
@@ -139,8 +151,7 @@ func main() {
 		}
 	}
 	if len(action_updates) > 0 {
-		output, err := json.MarshalIndent(action_updates, "", "    ")
-
+		output, err := jsonDump(action_updates, prettyprint)
 		if err != nil {
 			log.Printf("[ERROR] Something went wrong: %v", err.Error())
 		}
